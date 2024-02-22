@@ -1,0 +1,24 @@
+import 'PetriNet.ecore'
+
+package petrinet
+
+-- On s'assure que le Petri a au moins une place et une transition
+context PetriNet
+inv HasElements: self.PetriNetElement->select(e | e.oclIsTypeOf(Place))->size() > 0 and
+                 self.PetriNetElement->select(e | e.oclIsTypeOf(Transition))->size() > 0
+
+-- Contrainte pour s'assurer que les noms des places dans le Petri sont uniques
+context PetriNet
+inv UniquePlaceNames: self.PetriNetElement->select(e | e.oclIsTypeOf(Place))->collect(p|p.oclAsType(Place))->forAll(w1, w2 | w1 = w2 or w1.nomPlace <> w2.nomPlace)
+
+-- Contrainte pour s'assurer qu'une transition est reliée à une source et une cible
+context Transition
+inv ValidConnections: self.linksToPredecessors->size() > 0 and
+                      self.linksToSuccessors->size() > 0
+
+-- Contrainte qui s'assure qu'un arc relie bien une place à une transition et inversement
+context Arc
+inv ValidArcConnection: (self.predecessor.oclIsTypeOf(Place) and self.successor.oclIsTypeOf(Transition)) or
+                        (self.predecessor.oclIsTypeOf(Transition) and self.successor.oclIsTypeOf(Place))
+
+endpackage

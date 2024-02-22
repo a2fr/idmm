@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simplepdl:Process
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:simplepdl="http://simplepdl"
+    xsi:schemaLocation="http://simplepdl SimplePDL.ecore"
+    name="01-developpement">
+  <processelement
+      xsi:type="simplepdl:WorkDefinition"
+      linksToPredecessors="//@processelement.4"
+      linksToSuccessors="//@processelement.3 //@processelement.4"
+      name="concevoir"/>
+  <processelement
+      xsi:type="simplepdl:WorkDefinition"
+      linksToPredecessors="//@processelement.3 //@processelement.5"
+      name="te"/>
+  <processelement
+      xsi:type="simplepdl:WorkDefinition"
+      linksToSuccessors="//@processelement.5"
+      name="programmer"/>
+  <processelement
+      xsi:type="simplepdl:WorkSequence"
+      predecessor="//@processelement.0"
+      successor="//@processelement.1"/>
+  <processelement
+      xsi:type="simplepdl:WorkSequence"
+      linkType="finishToStart"
+      predecessor="//@processelement.0"
+      successor="//@processelement.0"/>
+  <processelement
+      xsi:type="simplepdl:WorkSequence"
+      linkType="finishToFinish"
+      predecessor="//@processelement.2"
+      successor="//@processelement.1"/>
+  <processelement
+      xsi:type="simplepdl:Guidance"
+      element="//@processelement.2"
+      text="c'est cool de programmer."/>
+  <processelement
+      xsi:type="simplepdl:Ressource"
+      name="table"
+      nbRessourcesDisponibles="3"/>
+  <processelement
+      xsi:type="simplepdl:Ressource"
+      name="table"
+      nbRessourcesDisponibles="2"/>
+  <processelement
+      xsi:type="simplepdl:DemandeRessource"
+      nbRessourcesDemandees="1"
+      ressourceType="//@processelement.7"
+      successor="//@processelement.0"/>
+  <processelement
+      xsi:type="simplepdl:DemandeRessource"
+      nbRessourcesDemandees="2"
+      ressourceType="//@processelement.8"
+      successor="//@processelement.2"/>
+  <processelement
+      xsi:type="simplepdl:DemandeRessource"
+      nbRessourcesDemandees="1"
+      ressourceType="//@processelement.8"
+      successor="//@processelement.1"/>
+</simplepdl:Process>

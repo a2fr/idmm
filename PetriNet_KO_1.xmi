@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<petrinet:PetriNet
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:petrinet="http://petrinet"
+    xsi:schemaLocation="http://petrinet PetriNet.ecore">
+  <PetriNetElement
+      xsi:type="petrinet:Place"
+      linksToPredecessors="//@PetriNetElement.7"
+      linksToSuccessors="//@PetriNetElement.8"
+      nomPlace="p1"/>
+  <PetriNetElement
+      xsi:type="petrinet:Place"
+      linksToPredecessors="//@PetriNetElement.9"
+      nomPlace="p1"
+      jetons="//@PetriNetElement.5 //@PetriNetElement.4"/>
+  <PetriNetElement
+      xsi:type="petrinet:Transition"
+      linksToSuccessors="//@PetriNetElement.7"
+      nomTransition="t1"/>
+  <PetriNetElement
+      xsi:type="petrinet:Transition"
+      linksToPredecessors="//@PetriNetElement.8"
+      linksToSuccessors="//@PetriNetElement.9"
+      nomTransition="t2"/>
+  <PetriNetElement
+      xsi:type="petrinet:Jetons"
+      nom="j1"/>
+  <PetriNetElement
+      xsi:type="petrinet:Jetons"
+      nom="j2"/>
+  <PetriNetElement
+      xsi:type="petrinet:Arc"
+      poids="1"
+      nom="a1"/>
+  <PetriNetElement
+      xsi:type="petrinet:Arc"
+      poids="1"
+      predecessor="//@PetriNetElement.0"
+      successor="//@PetriNetElement.2"
+      nom="a2"/>
+  <PetriNetElement
+      xsi:type="petrinet:Arc"
+      poids="1"
+      predecessor="//@PetriNetElement.3"
+      successor="//@PetriNetElement.0"
+      nom="a3"/>
+  <PetriNetElement
+      xsi:type="petrinet:Arc"
+      poids="1"
+      predecessor="//@PetriNetElement.1"
+      successor="//@PetriNetElement.3"
+      nom="a4"/>
+</petrinet:PetriNet>

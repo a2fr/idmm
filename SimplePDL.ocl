@@ -1,0 +1,47 @@
+import 'SimplePDL.ecore'
+
+package simplepdl
+
+context Process
+inv validName('Invalid name: ' + self.name):
+	self.name.matches('[A-Za-z_][A-Za-z0-9_]*')
+	
+context Process
+inv uniqWDNames: self.processelement
+->select(pe | pe.oclIsKindOf(WorkDefinition))
+->collect(pe | pe.oclAsType(WorkDefinition))
+->forAll(w1, w2 | w1 = w2 or w1.name <> w2.name)
+
+context ProcessElement
+def: process(): Process =
+	Process.allInstances()
+		->select(p | p.processelement->includes(self))
+		->asSequence()->first()
+
+context WorkSequence
+inv successorAndPredecessorInSameProcess('Activities not in the same process : '
+		+ self.predecessor.name + ' in ' + self.predecessor.process().name+ ' and '
+		+ self.successor.name + ' in ' + self.successor.process().name
+):
+	self.process() = self.successor.process()
+	and self.process() = self.predecessor.process()
+	
+context WorkSequence
+inv notReflexive: self.predecessor <> self.successor
+
+context WorkDefinition
+inv validWDName('Invalid WD name: ' + self.name): self.name.matches('[A-Za-z_][A-Za-z0-9_]+')
+
+inv nameIsLongEnough('Name is too short: ' + self.name): self.name.size() >= 3
+	
+context WorkDefinition
+inv uniqNames: self.Process.processelement->select(pe | pe.oclIsKindOf(WorkDefinition))
+->collect(pe | pe.oclAsType(WorkDefinition))
+->forAll(w | self = w or self.name <> w.name)
+
+context Ressource
+inv validRessourceName: self.Process.processelement->select(pe | pe.oclIsKindOf(Ressource))
+->collect(pe | pe.oclAsType(Ressource))
+->forAll(r | self = r or self.name <> r.name)
+
+endpackage

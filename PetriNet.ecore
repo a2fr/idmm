@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="petrinet" nsURI="http://petrinet" nsPrefix="petrinet">
+  <eClassifiers xsi:type="ecore:EClass" name="PetriNet">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nom" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="PetriNetElement" upperBound="-1"
+        eType="#//PetriNetElement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PetriNetElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Place" eSuperTypes="#//PetriArchi">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nomPlace" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="jetons" upperBound="-1"
+        eType="#//Jetons"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Transition" eSuperTypes="#//PetriArchi">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nomTransition" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Arc" eSuperTypes="#//PetriNetElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="poids" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="predecessor" lowerBound="1"
+        eType="#//PetriArchi" eOpposite="#//PetriArchi/linksToPredecessors"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="successor" lowerBound="1"
+        eType="#//PetriArchi" eOpposite="#//PetriArchi/linksToSuccessors"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nom" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PetriArchi" eSuperTypes="#//PetriNetElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="linksToPredecessors" upperBound="-1"
+        eType="#//Arc" eOpposite="#//Arc/predecessor"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="linksToSuccessors" upperBound="-1"
+        eType="#//Arc" eOpposite="#//Arc/successor"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Jetons" eSuperTypes="#//PetriNetElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nom" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+</ecore:EPackage>
